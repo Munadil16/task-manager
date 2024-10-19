@@ -1,3 +1,4 @@
+import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import type { Application, NextFunction, Request, Response } from "express";
@@ -11,6 +12,12 @@ connectDb();
 
 const app: Application = express();
 const PORT = process.env.PORT ?? 3000;
+
+app.use(
+  cors({
+    origin: process.env.CORS_ORIGIN as string,
+  })
+);
 
 app.use(express.json());
 
