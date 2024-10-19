@@ -4,6 +4,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import App from "./App.tsx";
+import SignIn from "./pages/sign-in.tsx";
 import SignUp from "./pages/sign-up.tsx";
 import { Toaster } from "./components/ui/sonner.tsx";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -15,6 +16,7 @@ createRoot(document.getElementById("root")!).render(
         <Routes>
           <Route path="/">
             <Route path="" element={<App />} />
+            <Route path="signin" element={<SignIn />} />
             <Route path="signup" element={<SignUp />} />
           </Route>
         </Routes>

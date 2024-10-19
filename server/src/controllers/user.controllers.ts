@@ -72,7 +72,7 @@ export const signIn = async (req: Request, res: Response) => {
     if (!isValidPassword) {
       return res
         .status(401)
-        .json({ messag: "Invalid credentials", success: false });
+        .json({ message: "Invalid credentials", success: false });
     }
 
     const token = jwt.sign(
