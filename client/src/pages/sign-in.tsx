@@ -1,6 +1,8 @@
 import { toast } from "sonner";
 import { useState } from "react";
 import axios, { AxiosError } from "axios";
+import { useSetRecoilState } from "recoil";
+import { authAtom } from "@/store/atoms/auth";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +10,7 @@ import { Button } from "@/components/ui/button";
 
 const SignIn = () => {
   const navigate = useNavigate();
+  const setIsAuthorized = useSetRecoilState(authAtom);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
@@ -28,6 +31,8 @@ const SignIn = () => {
 
       if (res.data.success) {
         toast.success(res.data.message);
+        setIsAuthorized(true);
+        localStorage.setItem("token", res.data.token);
         navigate("/tasks");
       }
     } catch (err) {
