@@ -46,13 +46,44 @@ const SignIn = () => {
     }
   };
 
+  const handleGuestLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const toastId = toast.loading("Signing in as guest...");
+
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/api/v1/user/signin`,
+        {
+          email: "guest@gmail.com",
+          password: "guest123",
+        }
+      );
+
+      toast.dismiss(toastId);
+
+      if (res.data.success) {
+        toast.success(res.data.message);
+        setIsAuthorized(true);
+        localStorage.setItem("token", res.data.token);
+        navigate("/tasks");
+      }
+    } catch (err) {
+      toast.dismiss(toastId);
+      if (err instanceof AxiosError) {
+        toast.error(err.response?.data.message);
+      } else {
+        toast.error("Something went wrong");
+      }
+    }
+  };
+
   if (isAuthorized) {
     return <Navigate to="/tasks" />;
   }
 
   return (
-    <main className="flex min-h-[80svh] items-center justify-center">
-      <section className="flex w-[90vw] flex-col items-center justify-center gap-8 sm:w-[30rem] lg:w-[25rem]">
+    <main className="flex min-h-[75svh] items-center justify-center">
+      <section className="flex w-[80vw] flex-col items-center justify-center gap-8 sm:w-[25rem] lg:w-[22rem]">
         <h1 className="text-2xl font-medium">Sign in to Task manager</h1>
 
         <form className="flex w-full flex-col gap-3">
@@ -72,9 +103,24 @@ const SignIn = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <Button type="button" className="font-medium" onClick={handleSignIn}>
-            Login
-          </Button>
+          <div className="flex items-center gap-4">
+            <Button
+              type="button"
+              className="w-1/2 font-medium"
+              onClick={handleSignIn}
+            >
+              Login
+            </Button>
+
+            <Button
+              type="button"
+              variant={"outline"}
+              className="w-1/2 py-[22px] font-medium"
+              onClick={handleGuestLogin}
+            >
+              Guest Login
+            </Button>
+          </div>
         </form>
       </section>
     </main>

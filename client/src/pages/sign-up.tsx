@@ -48,8 +48,8 @@ const SignUp = () => {
   }
 
   return (
-    <main className="flex min-h-[80svh] items-center justify-center">
-      <section className="flex w-[90vw] flex-col items-center justify-center gap-8 sm:w-[30rem] lg:w-[25rem]">
+    <main className="flex min-h-[75svh] items-center justify-center">
+      <section className="flex w-[80vw] flex-col items-center justify-center gap-8 sm:w-[25rem] lg:w-[22rem]">
         <h1 className="text-2xl font-medium">Sign up to Task manager</h1>
 
         <form className="flex w-full flex-col gap-3">

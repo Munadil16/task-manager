@@ -53,12 +53,21 @@ const Navbar = () => {
           <ProfileDropDown setIsAuthorized={setIsAuthorized} />
         </div>
       ) : (
-        <Link
-          className={buttonVariants({ variant: "ghost", size: "sm" })}
-          to={"/signin"}
-        >
-          Sign in
-        </Link>
+        <div>
+          <Link
+            className={buttonVariants({ variant: "ghost", size: "sm" })}
+            to={"/signin"}
+          >
+            Sign in
+          </Link>
+
+          <Link
+            className={buttonVariants({ variant: "ghost", size: "sm" })}
+            to={"/signup"}
+          >
+            Sign up
+          </Link>
+        </div>
       )}
     </nav>
   );
