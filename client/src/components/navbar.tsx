@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { authAtom } from "@/store/atoms/auth";
 import { Button, buttonVariants } from "./ui/button";
@@ -16,8 +17,16 @@ type ProfileDropDownProps = {
 const Navbar = () => {
   const [isAuthorized, setIsAuthorized] = useRecoilState(authAtom);
 
+  useEffect(() => {
+    const isTokenAvailable = localStorage.getItem("token");
+
+    if (isTokenAvailable) {
+      setIsAuthorized(true);
+    }
+  }, []);
+
   return (
-    <nav className="flex items-center justify-between p-4">
+    <nav className="sticky top-0 flex w-full items-center justify-between bg-zinc-950 p-4">
       <Link to={"/"} className="text-lg font-medium">
         Task Manager
       </Link>
