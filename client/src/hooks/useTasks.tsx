@@ -24,9 +24,11 @@ export const useTasks = () => {
         );
 
         if (res.data.success) {
-          setTasks(res.data.tasks.subTasks);
+          setTasks(res.data.tasks);
         }
       } catch (err) {
+        console.error("Error in useTasks hook: ", err);
+
         if (err instanceof AxiosError) {
           toast.error(err.response?.data.message);
         } else {

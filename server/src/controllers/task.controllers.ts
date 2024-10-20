@@ -12,9 +12,15 @@ export const fetchAllTasks = async (req: Request, res: Response) => {
       createdBy: req.userId,
     }).populate("subTasks");
 
+    if (!tasks || tasks.subTasks.length === 0) {
+      return res
+        .status(200)
+        .json({ msg: "Tasks not found", success: true, tasks: [] });
+    }
+
     return res
       .status(200)
-      .json({ message: "Tasks fetched", success: true, tasks });
+      .json({ message: "Tasks fetched", success: true, tasks: tasks.subTasks });
   } catch (err) {
     console.error("Error while fetching tasks: ", err);
     return res
