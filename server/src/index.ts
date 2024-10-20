@@ -14,9 +14,23 @@ connectDb();
 const app: Application = express();
 const PORT = process.env.PORT ?? 3000;
 
+app.use((_req: Request, res: Response, next: NextFunction) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    process.env.CORS_ORIGIN as string
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, PATCH"
+  );
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
+});
+
 app.use(
   cors({
     origin: process.env.CORS_ORIGIN as string,
+    credentials: true,
   })
 );
 
