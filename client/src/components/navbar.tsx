@@ -15,6 +15,7 @@ type ProfileDropDownProps = {
 };
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [isAuthorized, setIsAuthorized] = useRecoilState(authAtom);
 
   useEffect(() => {
@@ -32,7 +33,25 @@ const Navbar = () => {
       </Link>
 
       {isAuthorized ? (
-        <ProfileDropDown setIsAuthorized={setIsAuthorized} />
+        <div className="flex items-center justify-center gap-6">
+          <Link to={"/tasks"} className="hidden hover:underline sm:block">
+            Tasks
+          </Link>
+
+          <Button
+            size={"sm"}
+            className="hidden sm:block"
+            onClick={() => {
+              localStorage.removeItem("token");
+              setIsAuthorized(false);
+              navigate("/signin");
+            }}
+          >
+            Logout
+          </Button>
+
+          <ProfileDropDown setIsAuthorized={setIsAuthorized} />
+        </div>
       ) : (
         <Link
           className={buttonVariants({ variant: "ghost", size: "sm" })}
@@ -56,7 +75,7 @@ const ProfileDropDown = ({ setIsAuthorized }: ProfileDropDownProps) => {
         <Button
           variant="outline"
           size="icon"
-          className="rounded-full bg-gradient-to-r from-cyan-500 to-blue-500"
+          className="block rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 sm:hidden"
         ></Button>
       </DropdownMenuTrigger>
 
