@@ -1,6 +1,7 @@
 import "./index.css";
 import { StrictMode } from "react";
 import { RecoilRoot } from "recoil";
+import { inject } from "@vercel/analytics";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -13,6 +14,8 @@ import Footer from "@/components/footer.tsx";
 import Navbar from "@/components/navbar.tsx";
 import { Toaster } from "@/components/ui/sonner.tsx";
 import { ThemeProvider } from "@/components/theme-provider";
+
+inject();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
