@@ -5,6 +5,7 @@ import type { Application, NextFunction, Request, Response } from "express";
 
 import { connectDb } from "./db";
 import userRouter from "./routes/user.routes";
+import taskRouter from "./routes/task.routes";
 
 dotenv.config();
 
@@ -22,6 +23,8 @@ app.use(
 app.use(express.json());
 
 app.use("/api/v1/user", userRouter);
+
+app.use("/api/v1/tasks", taskRouter);
 
 app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   console.error(err.stack);
