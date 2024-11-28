@@ -24,7 +24,7 @@ const Navbar = () => {
     if (isTokenAvailable) {
       setIsAuthorized(true);
     }
-  }, []);
+  }, [setIsAuthorized]);
 
   return (
     <nav className="sticky top-0 flex w-full items-center justify-between bg-zinc-950 p-4">

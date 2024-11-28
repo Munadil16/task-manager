@@ -18,11 +18,11 @@ export const auth = (req: Request, res: Response, next: NextFunction) => {
     next();
   } catch (err) {
     if (err instanceof JsonWebTokenError) {
-      return res.status(401).json({ msg: "Invalid token", success: false });
+      return res.status(401).json({ message: "Invalid token", success: false });
     } else {
       console.error("Error while verifying token: ", err);
       return res.status(500).json({
-        msg: "Internal server error",
+        message: "Internal server error",
         success: false,
       });
     }

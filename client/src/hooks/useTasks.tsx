@@ -40,7 +40,7 @@ export const useTasks = () => {
     };
 
     fetchTasks();
-  }, []);
+  }, [setTasks]);
 
   return [tasks, isLoading] as const;
 };
